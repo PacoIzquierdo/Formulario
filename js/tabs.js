@@ -1,3 +1,4 @@
+// Cambiar entre formularios
 function tabs(evt, opcion){
     var tabcontent, tablinks;
     

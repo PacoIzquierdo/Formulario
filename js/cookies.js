@@ -1,3 +1,4 @@
+// Creación de la cookie
 function crearCookie(nombre, valor, expira){
     
     var fecha = new Date();
@@ -8,6 +9,7 @@ function crearCookie(nombre, valor, expira){
     document.cookie = nombre + "=" + valor + ";" + expire + ";path=/";
     
 }
+// Lectura de cookie
 function leerCookie(nombre){
     
     var keyValue = document.cookie.match("(^|;) ?" + nombre + "=([^;]*)(;|$)");
@@ -17,17 +19,20 @@ function leerCookie(nombre){
         return null;
     }
 }
+// Borrar la cookie
 function borrarCookie(nombre){
     document.cookie = nombre + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
 }
 
+// Limpiar las cookies al salir de la sesion
 function salir(){
     
-    borrarCookie("usuario");
-    borrarCookie("password");
+    borrarCookie(document.getElementById('logForm').value);
+    borrarCookie(document.getElementById('usuario').value);
     pInicio();
     
 }
+// Comprobar si existe cookie, en caso afirmativo, dejar sesion iniciada
 function pInicio(){
     
         document.getElementById("tabs").style.display = "inline";
@@ -39,12 +44,15 @@ function pInicio(){
         for(let c = 0 ; c < inputs.length ; c++) inputs[c].value = "";
     
 }
-function registrado(){
+function registrado(usuario){
     
+        borrarError();
         document.getElementById("tabs").style.display = "none";
         let forms = document.getElementsByTagName("forms");
         for(let c = 0 ; c < forms.length ; c++) forms[c].style.display = 'none';
         document.getElementById("registrado").style.display = 'inline';
-        if(document.cookie) document.getElementById("saludo").innerHTML = "Hola " + leerCookie("usuario");
-    
+        if(document.cookie){ 
+            document.getElementById("saludo").innerHTML = "Hola, has logeado satisfactoriamente.";
+                  
+        }
 }
